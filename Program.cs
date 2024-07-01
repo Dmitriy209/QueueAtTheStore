@@ -12,8 +12,6 @@ namespace QueueAtTheStore
 
             int wallet = 0;
 
-            int maxQueueClients = queueClients.Count;
-
             bool isRunning = true;
 
             while (isRunning)
