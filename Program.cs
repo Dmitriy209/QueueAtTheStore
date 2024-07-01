@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 
 namespace QueueAtTheStore
 {
@@ -7,8 +8,7 @@ namespace QueueAtTheStore
     {
         static void Main(string[] args)
         {
-            List<int> purchaseAmount = new List<int> { 250, 5163, 1248, 9803, 25, 146, 347, 513, 168, 790, 1524, 796 };
-            Queue<int> queueClients = new Queue<int>(purchaseAmount);
+            Queue<int> queueClients = CreateQueue();
 
             int wallet = 0;
 
@@ -35,6 +35,26 @@ namespace QueueAtTheStore
             Console.WriteLine($"Клиент оплатил: {purchaseAmount}");
 
             return purchaseAmount;
+        }
+
+        private static Queue<int> CreateQueue()
+        {
+            Random random = new Random();
+
+            Queue<int> queue = new Queue<int>();
+
+            int minLimitRandom = 10;
+            int maxLimitRandom = 10001;
+
+            int queueLimit = 10;
+
+            for (int i = 0; i < queueLimit; i++)
+            {
+                int purchaseAmount = random.Next(minLimitRandom, maxLimitRandom);
+                queue.Enqueue(purchaseAmount);
+            }
+
+            return queue;
         }
     }
 }
