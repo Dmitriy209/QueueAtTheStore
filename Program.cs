@@ -12,20 +12,15 @@ namespace QueueAtTheStore
 
             int wallet = 0;
 
-            bool isRunning = true;
-
-            while (isRunning)
+            while (queueClients.Count > 0)
             {
                 Console.WriteLine("Нажмите любую клавишу, чтобы продолжить принимать клиентов.");
-                string userInput = Console.ReadLine();
+                Console.ReadKey();
 
                 Console.Clear();
 
-                wallet += SaleOfGoods(queueClients);
+                wallet += ServesTheClient(queueClients);
                 Console.WriteLine($"Ваш счёт: {wallet}");
-
-                if (queueClients.Count == 0)
-                    isRunning = false;
             }
 
             Console.Clear();
@@ -33,7 +28,7 @@ namespace QueueAtTheStore
                 $"Вы заработали: {wallet}");
         }
 
-        private static int SaleOfGoods(Queue<int> queueClients)
+        private static int ServesTheClient(Queue<int> queueClients)
         {
             int purchaseAmount = queueClients.Dequeue();
 
