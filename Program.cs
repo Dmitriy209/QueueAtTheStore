@@ -14,15 +14,20 @@ namespace QueueAtTheStore
 
             int maxQueueClients = queueClients.Count;
 
-            for (int i = 0; i < maxQueueClients; i++)
+            bool isRunning = true;
+
+            while (isRunning)
             {
                 Console.WriteLine("Нажмите любую клавишу, чтобы продолжить принимать клиентов.");
-                ConsoleKeyInfo userInput = Console.ReadKey();
+                string userInput = Console.ReadLine();
 
                 Console.Clear();
 
-                wallet += SaleOfGoods(ref queueClients);
+                wallet += SaleOfGoods(queueClients);
                 Console.WriteLine($"Ваш счёт: {wallet}");
+
+                if (queueClients.Count == 0)
+                    isRunning = false;
             }
 
             Console.Clear();
@@ -30,7 +35,7 @@ namespace QueueAtTheStore
                 $"Вы заработали: {wallet}");
         }
 
-        private static int SaleOfGoods(ref Queue<int> queueClients)
+        private static int SaleOfGoods(Queue<int> queueClients)
         {
             int purchaseAmount = queueClients.Dequeue();
 
